@@ -1,13 +1,8 @@
 from classes import Data
-from features.read import read
+from components.showmemore import showmemore
 
 
 def show(data):
-    # try:
-    #     data = read()
-    # except FileNotFoundError:
-    #     print("File not found")
-
     print('\nСтатистика последних операций')
 
     k = 0
@@ -29,7 +24,5 @@ def show(data):
               f'{string.description}')
         k += 1
         if k == 10:
-            print('\nПоказаны 10 послених записей, показать все?[Y/n]?')
-            inp = input()
-            if inp.upper() != 'Y' and inp != '':
+            if showmemore() is False:
                 break
