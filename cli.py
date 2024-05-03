@@ -1,10 +1,13 @@
 from features.show import show
-from features.order import order_date, order_value
-from features.welcome import welcome
+from components.welcome import welcome
 from features.read import read
-from features.help import help
-from components.sortby import sort_by
+from components.help import help
 from components.exit import exit
+from components.sort import sort
+from components.errortext import red
+from components.bluetext import blue
+from components.commands import commands
+from features.add import add
 
 
 def main():
@@ -19,27 +22,24 @@ def main():
             show(data)
 
         elif cmd == '--order':
-            data = read()
-            print('\nПо какому полю сортировать?'
-                  '\n[1] По дате и времени'
-                  '\n[2] По сумме')
-            inp = input('\n')
-            if inp == '1':
-                state = sort_by()
-                ordered_data = order_date(data, state)
-            elif inp == '2':
-                state = sort_by()
-                ordered_data = order_value(data, state)
-            else:
-                print('\nНекорректный ввод, введите номер пункта')
-            show(ordered_data)
+            sort()
 
-        elif cmd == '--help' or cmd == '-h' or cmd == '--commands':
+        elif cmd == '--add':
+            add()
+
+        elif cmd == '--help' or cmd == '-h':
             help()
 
-        elif cmd == '--exit':
+        elif cmd == '--commands':
+            commands()
+
+        elif cmd == '--exit' or cmd == '/q':
             exit()
             break
+
+        else:
+            print(red("Такой команды нет. Введите -h или --help для просмотра помощи"))
+            print(blue('Также вы можете просмотреть доступные команды, введя --commands'))
 
 
 if __name__ == '__main__':
