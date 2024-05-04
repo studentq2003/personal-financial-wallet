@@ -22,6 +22,7 @@ from utils.add_id import add_id
 
 
 def main():
+    global target_id
     welcome()
     zero_balance()
 
