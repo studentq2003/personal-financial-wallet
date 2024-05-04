@@ -1,0 +1,7 @@
+version: '3'
+services:
+  personal-finance-wallet-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true

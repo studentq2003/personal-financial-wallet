@@ -1,5 +1,5 @@
 path = './'
-datafile = 'money.json'
+datafile = 'data/money.json'
 balance_file = 'data/balance.json'
 backup_file = 'data/backup.json'
 system_backup_file = 'data/system_backup.json'
@@ -7,6 +7,7 @@ system_backup_file = 'data/system_backup.json'
 schema = {
     "type": "object",
     "properties": {
+        "id": {"type": "integer"},
         "type": {
             "type": "string",
             "enum": ["+", "-"]
@@ -16,5 +17,5 @@ schema = {
         "time": {"type": "string"},
         "description": {"type": "string"},
     },
-    "required": ["value", "date", "time"],
+    "required": ["id", "value", "date", "time"],
 }

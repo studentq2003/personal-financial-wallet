@@ -9,7 +9,7 @@ from features.search import search
 from features.update_row import update_row
 
 from utils.zero_balance import zero_balance
-from utils.restore_backup import restore_backup
+from utils.restore_backup import restore_backup, restore_system_backup
 from utils.add_id import add_id
 from utils.make_backup import make_backup
 from utils.validate_json import validate_json
@@ -29,26 +29,43 @@ def main():
     welcome()
     zero_balance()
 
+    onload_check = False
+
     # onload валидация основного файла money.json, если ошибки - восстановление из бекапа
+    # если бекапа тоже нет, восстановление из системного бекапа
     try:
         data = read()
         if validate_json(data, schema) is False:
+            # print(
+            #     error(
+            #         f"Файл {datafile} не валидный, попытка восстановить файл из backup...\n"
+            #     )
+            # )
             restore_backup()
+        else:
+            onload_check = True
     except Exception:
-        print(
-            error(
-                f"Файл {datafile} не валидный, попытка восстановить файл из backup...\n"
-            )
-        )
-        restore_backup()
+        # print(
+        #     error(
+        #         f"Файл backup не валидный, попытка восстановить файл из system_backup...\n"
+        #     )
+        # )
+        restore_system_backup()
+        onload_check = True
 
-    # генерация id на элементы без id
-    data = read()
-    add_id(data)
+    if onload_check is True:
+        # генерация id на элементы без id
+        data = read()
+        add_id(data)
 
     # листенер команд
     while True:
-        cmd = input('\nВведите команду\n')
+        print(
+            default(
+                '\nВведите команду\n'
+            )
+        )
+        cmd = input()
 
         if cmd == '--show':
             data = order()
