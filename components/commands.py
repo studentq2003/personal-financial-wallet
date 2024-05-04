@@ -1,10 +1,10 @@
-from components.bluetext import blue
+from components.colors import default
 def commands():
     print('Список доступных комманд:')
-    print(blue('\t--help'))
-    print(blue('\t--show'))
-    print(blue('\t--exit or /q'))
-    print(blue('\t--order'))
-    print(blue('\t--search'))
-    print(blue('\t--update'))
-    print(blue('\t--remove or -rm'))
+    print(default('\t--help'))
+    print(default('\t--show'))
+    print(default('\t--exit or /q'))
+    print(default('\t--order'))
+    print(default('\t--search'))
+    print(default('\t--update'))
+    print(default('\t--remove or -rm'))

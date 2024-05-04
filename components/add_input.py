@@ -1,8 +1,9 @@
 from datetime import datetime
-from components.errortext import red
+from components.colors import error
 from utils.date_time_exceptor import check_date, check_time
 from components.category_selector import category_selector
 from utils.integer_exceptor import integer_exceptor
+from components.colors import error, default
 
 
 def add_input():
@@ -12,15 +13,12 @@ def add_input():
 
     category = category_selector()
 
-    print("Введите сумму операции\n")
-    # while True:
-    #     value = input()
-    #     if value.isdigit() and int(value) >= 0:
-    #         break
-    #     else:
-    #         print("Введите корректную сумму операции")
+    print(default("Введите сумму операции\n"))
 
-    value = integer_exceptor("Введите корректную сумму операции")
+    value = integer_exceptor(
+        error(
+            "Введите корректную сумму операции"
+        ))
 
     print('Выберите дату и время операции\n'
           'Установить текущую дату и время? [Y/n]?')
@@ -39,9 +37,9 @@ def add_input():
                     continue
                 break
             except Exception as e:
-                print(red(f"Введите корректную дату вида {cur_date}"))
+                print(error(f"Введите корректную дату вида {cur_date}"))
 
-        print(f"Введите время в формате {cur_time}")
+        print(error(f"Введите время в формате {cur_time}"))
         while True:
             try:
                 time = input()
@@ -49,17 +47,20 @@ def add_input():
                     continue
                 break
             except Exception as e:
-                print(red(f"Введите корректное время вида {cur_time}, error: {e}"))
+                print(error(f"Введите корректное время вида {cur_time}, error: {e}"))
 
     else:
         date = datetime.now().strftime("%d-%m-%Y")
         time = datetime.now().strftime("%H:%M")
 
-    print("Введите описание операции до 30 символов, либо оставьте поле пустым:")
+    print(default(
+        "Введите описание операции до 30 символов, либо оставьте поле пустым:"
+    ))
+
     while True:
         description = input()
         if len(description) > 30:
-            print("Введите описание не более 30 символов")
+            print(error("Введите описание не более 30 символов"))
         else:
             break
 

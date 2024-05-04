@@ -5,9 +5,6 @@ from features.write import write
 
 def add():
     jdata = read()
-
     data = add_input()
-
     jdata.append(data)
-
     write(jdata)

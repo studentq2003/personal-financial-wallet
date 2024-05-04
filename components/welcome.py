@@ -1,15 +1,19 @@
-from components.bluetext import blue
+from components.colors import default, purple
 
 
 def welcome():
     print("\n")
-    print(blue("Добро пожаловать в Личный финансовый кошелёк!"))
+    print(default("Добро пожаловать в Личный финансовый кошелёк!"))
 
     print(
         "Для работы с приложением Вам нужно вводить в консоль команды\n"
         "Если вы не знаете команды приложения, введите -h, --help или --commands\n"
         "Перед использованием программы рекомендуется изучить руководство в pdf файле в репозитории\n"
-        "\033[3m\033[35m\033[40m{}\033[0m".format("Автор ПО - Никулин А. А.\t"
-                                                  "t.me/animal_q\t"
-                                                  "github.com/studentq2003")
-        )
+    )
+    print(
+        purple(
+            "Автор ПО - Никулин А. А.\t"
+            "t.me/animal_q\t"
+            "github.com/studentq2003\n"
+        ))
+

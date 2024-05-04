@@ -1,2 +1,5 @@
+from components.colors import purple
+
+
 def exit():
-    print("\033[3m\033[35m\033[40m{}\033[0m".format("Работа программы завершена!"))
+    print(purple("Работа программы завершена!"))
