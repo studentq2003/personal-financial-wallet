@@ -1,8 +1,8 @@
 path = './'
 datafile = 'money.json'
-balance_file = 'balance.json'
-backup_file = 'backup.json'
-system_backup_file = 'system_backup.json'
+balance_file = 'data/balance.json'
+backup_file = 'data/backup.json'
+system_backup_file = 'data/system_backup.json'
 
 schema = {
     "type": "object",
