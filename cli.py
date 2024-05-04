@@ -36,20 +36,10 @@ def main():
     try:
         data = read()
         if validate_json(data, schema) is False:
-            # print(
-            #     error(
-            #         f"Файл {datafile} не валидный, попытка восстановить файл из backup...\n"
-            #     )
-            # )
             restore_backup()
         else:
             onload_check = True
     except Exception:
-        # print(
-        #     error(
-        #         f"Файл backup не валидный, попытка восстановить файл из system_backup...\n"
-        #     )
-        # )
         restore_system_backup()
         onload_check = True
 

@@ -13,7 +13,7 @@ def validate_json(data, schema):
     except Exception:
         return False
 
-#
+
 # schema = {
 #     "type": "object",
 #     "properties": {

@@ -1,4 +1,10 @@
-from datetime import date
+from datetime import datetime
+from classes import Data
+
+from features.show import show
+from features.read import read
+
+from utils.date_time_exceptor import check_date
 
 from components.colors import default, purple, error
 
@@ -17,6 +23,9 @@ def input_value():
                     "Введите корректную сумму операции"
                 ))
         except Exception:
+            print(error(
+                "Введите корректную сумму операции"
+            ))
             pass
 
 
@@ -26,7 +35,18 @@ def input_date():
     ))
     while True:
         try:
-            return input()
+            cur_date = datetime.now().strftime("%d-%m-%Y")
+            print(f"Введите дату операции в формате {cur_date}")
+            while True:
+                try:
+                    inp_date = input()
+                    inp_date = datetime.strptime(inp_date, '%d-%m-%Y')
+                    date = inp_date.strftime("%d-%m-%Y")
+                    if not check_date(date):
+                        continue
+                    return date
+                except Exception as e:
+                    print(error(f"Введите корректную дату вида {cur_date}"))
         except Exception:
             pass
 
@@ -47,15 +67,26 @@ def update_row_interface():
     print(purple("\nИзменение записи\n"))
     print(default("Введите id операции для изменения\n"))
 
-    while True:
+    x = True
+    k = 0
+    while x == True:
         try:
-            target_id = int(input())
+            if k > 0:
+                print(error("Введите корректный ID. Чтобы найти ID операций, введите --show"))
+            k += 1
+            target_id = input()
+            data = read()
+            if target_id == '--show':
+                show(data)
+            for i in data:
+                string = Data(i)
+                if string.id == int(target_id):
+                    x = False
+                    break
+                else:
+                    continue
         except Exception:
-            pass
-        if target_id > 0:
-            break
-        else:
-            print(error("Введите корректный ID. Чтобы найти ID операций, введите --show"))
+            print(error("Нельзя использовать буквы и символы, доступны только цифры"))
 
     print(default("Выберите поле для изменить"))
     while True:
@@ -68,15 +99,15 @@ def update_row_interface():
             if field == 1:
                 field = 'value'
                 value = input_value()
-                return target_id, field, value
+                return int(target_id), field, value
             elif field == 2:
                 field = 'date'
                 value = input_date()
-                return target_id, field, value
+                return int(target_id), field, value
             elif field == 3:
                 field = 'description'
                 value = input_description()
-                return target_id, field, value
+                return int(target_id), field, value
             else:
                 print(error(
                     "Выберите корректную опцию"
