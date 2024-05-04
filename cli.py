@@ -10,10 +10,12 @@ from components.commands import commands
 from features.add import add
 from features.balance import balance
 from features.rewrite_balance import rewrite_balance
+from utils.zero_balance import zero_balance
 
 
 def main():
     welcome()
+    zero_balance()
 
     while True:
         cmd = input('\nВведите команду\n')
@@ -29,7 +31,7 @@ def main():
             add()
 
         elif cmd == '--balance' or cmd == '-b':
-            balance()
+            print("Текущий баланс: ", balance())
 
         elif cmd == '-rb' or cmd == '--rbalance':
             rewrite_balance()

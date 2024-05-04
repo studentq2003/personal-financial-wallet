@@ -1,19 +1,14 @@
 from features.read import read, read_balance
 from classes import Data, Balance
+from components.balance_updater import balance_update
 
 
 def balance():
     global b
     data = read_balance()
-    b = Balance(data)
+    for i in data:
+        b = Balance(i)
 
-    data = read()
+    v = balance_update(b)
 
-    for string in data:
-        s = Data(string)
-        if s.category == '-':
-            b.value -= int(s.value)
-        elif s.category == '+':
-            b.value += int(s.value)
-
-    print("Текущий баланс: ", b.value)
+    return v

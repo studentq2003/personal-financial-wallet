@@ -2,6 +2,7 @@ from datetime import datetime
 from components.errortext import red
 from utils.date_time_exceptor import check_date, check_time
 from components.category_selector import category_selector
+from utils.integer_exceptor import integer_exceptor
 
 
 def add_input():
@@ -12,12 +13,14 @@ def add_input():
     category = category_selector()
 
     print("Введите сумму операции\n")
-    while True:
-        value = input()
-        if value.isdigit() and int(value) >= 0:
-            break
-        else:
-            print("Введите корректную сумму операции")
+    # while True:
+    #     value = input()
+    #     if value.isdigit() and int(value) >= 0:
+    #         break
+    #     else:
+    #         print("Введите корректную сумму операции")
+
+    value = integer_exceptor("Введите корректную сумму операции")
 
     print('Выберите дату и время операции\n'
           'Установить текущую дату и время? [Y/n]?')

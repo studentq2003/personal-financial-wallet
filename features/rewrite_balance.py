@@ -1,27 +1,29 @@
 from classes import Balance
 from features.read import read_balance
 from features.write import write_balance
+from features.balance import balance
+from components.balance_updater import balance_update
+from utils.integer_exceptor import integer_exceptor
 
 
 def rewrite_balance():
-    global rb
-    try:
-        data = read_balance()
-        for i in data:
-            rb = Balance(i)
-    except Exception as e:
-        print(e)
+    current_balance = balance()
 
     print("Введите новую сумму для обновления баланса\n"
-          f"Текущий баланс: {rb.value}")
+          f"Текущий баланс: {current_balance}")
 
-    while True:
-        try:
-            b.value = int(input())
-        except Exception as e:
-            print("Некорректный ввод: ", e)
-        break
+    inp = integer_exceptor("Введите корректный баланс. Он должен быть целочисленным и не содержать другие символы")
 
-    new_b = {"balance": rb.value}
+    new_balance = {"balance": inp}
+    bl = Balance(new_balance)
+    tmp = bl.value
 
-    write_balance(new_b)
+    v = balance_update(bl)
+
+    delta = tmp - v
+    u = tmp + delta
+
+    data = read_balance()
+    data.append([{"balance": u}])
+
+    write_balance(data[-1])
