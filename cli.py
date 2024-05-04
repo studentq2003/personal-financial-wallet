@@ -3,7 +3,7 @@ from components.welcome import welcome
 from components.help import help
 from components.exit import exit
 from components.order import order
-from components.colors import default
+from components.colors import default, error
 from components.commands import commands
 from features.add import add
 from features.balance import balance
@@ -14,7 +14,7 @@ from components.search_input import search_input
 from components.error_cmd import error_cmd
 from utils.make_backup import make_backup
 from utils.validate_json import validate_json
-from variables import schema
+from variables import schema, datafile
 from features.read import read
 from utils.restore_backup import restore_backup
 
@@ -24,8 +24,17 @@ def main():
     zero_balance()
 
     # onload валидация основного файла money.json, если ошибки - восстановление из бекапа
-    data = read()
-    if validate_json(data, schema) is False:
+
+    try:
+        data = read()
+        if validate_json(data, schema) is False:
+            restore_backup()
+    except Exception:
+        print(
+            error(
+                f"Файл {datafile} не валидный, попытка восстановить файл из backup...\n"
+            )
+        )
         restore_backup()
 
     # листенер команд

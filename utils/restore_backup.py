@@ -2,7 +2,7 @@ from variables import system_backup_file, backup_file, schema
 from features.read import read_backup, read_system_backup
 from features.write import write
 from utils.validate_json import validate_json
-from components.colors import error
+from components.colors import error, purple
 
 
 def restore_backup():
@@ -10,7 +10,9 @@ def restore_backup():
         data = read_backup()
         if validate_json(data, schema):
             write(data)
-            print(f"datafile восстановлен из {backup_file}")
+            print(purple(
+                f"datafile восстановлен из {backup_file}\n"
+            ))
     except Exception:
         pass
 
