@@ -92,8 +92,11 @@ def main():
             exit()
             break
 
-        elif cmd == '-mb' or cmd == 'mkdump':
+        elif cmd == '-mb' or cmd == '--mkbackup':
             make_backup()
+
+        elif cmd == '-r' or cmd == '--restore':
+            restore_backup()
 
         else:
             error_cmd()

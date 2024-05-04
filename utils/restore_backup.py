@@ -10,9 +10,9 @@ def restore_backup():
         data = read_backup()
         if validate_json(data, schema):
             write(data)
-            # print(purple(
-            #     f"{datafile} восстановлен из {backup_file}\n"
-            # ))
+            print(purple(
+                f"{datafile} восстановлен из {backup_file}\n"
+            ))
         else:
             print(default(
                 "Попытка восстановить из системного бекапа..."
