@@ -1,9 +1,11 @@
 from datetime import datetime
-from components.colors import error
 from utils.date_time_exceptor import check_date, check_time
 from components.category_selector import category_selector
 from utils.integer_exceptor import integer_exceptor
 from components.colors import error, default
+from utils.id_generator import id_generator
+from classes import Data
+from features.read import read
 
 
 def add_input():
@@ -64,4 +66,21 @@ def add_input():
         else:
             break
 
-    return {"type": category, "value": value, "date": date, "time": time, "description": description}
+    data = read()
+    while True:
+        id = id_generator()
+
+        for i in data:
+            string = Data(i)
+            if string.id == id:
+                continue
+        break
+
+    return {
+        "id": id,
+        "type": category,
+        "value": value,
+        "date": date,
+        "time": time,
+        "description": description
+    }

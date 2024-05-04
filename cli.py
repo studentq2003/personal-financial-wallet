@@ -17,6 +17,8 @@ from utils.validate_json import validate_json
 from variables import schema, datafile
 from features.read import read
 from utils.restore_backup import restore_backup
+from features.update_row import update_row
+from utils.add_id import add_id
 
 
 def main():
@@ -24,7 +26,6 @@ def main():
     zero_balance()
 
     # onload валидация основного файла money.json, если ошибки - восстановление из бекапа
-
     try:
         data = read()
         if validate_json(data, schema) is False:
@@ -36,6 +37,10 @@ def main():
             )
         )
         restore_backup()
+
+    # генерация id на элементы без id
+    data = read()
+    add_id(data)
 
     # листенер команд
     while True:
@@ -59,6 +64,9 @@ def main():
         elif cmd == '--search' or cmd == '-s':
             field, value = search_input()
             search(field, value)
+
+        elif cmd == '--update' or cmd == '-u':
+            update_row()
 
         elif cmd == '--help' or cmd == '-h':
             help()

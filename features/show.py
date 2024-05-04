@@ -3,11 +3,12 @@ from components.showmemore import showmemore
 
 
 def show(data):
+    global string
     print('\nСтатистика последних операций')
 
     k = 0
-    print('{:<5} {:<10} {:<10} {:<20} {:<20} {:<30}'.format(
-        '№', 'Категория', 'Сумма', 'Дата', 'Время', 'Описание'
+    print('{:<5} {:<10} {:<10} {:<10} {:<20} {:<20} {:<30}'.format(
+        '№', 'ID', 'Категория', 'Сумма', 'Дата', 'Время', 'Описание'
     ))
     for i in data:
         try:
@@ -20,6 +21,7 @@ def show(data):
         else:
             category = 'Доход '
         print(f'{k + 1:<5}'
+              f'{string.id:<10}'
               f'{category:<10}'
               f'{string.value:<10}'
               f'{string.date:<20}'

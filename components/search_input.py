@@ -8,7 +8,10 @@ def search_input():
               "\t[2] - Расход\n"
               "\t[3] - Сумма\n"
               "\t[4] - Дата\n"
-              "\t[5] - Описание\n")
+              "\t[5] - Описание\n"
+              "\t[6] - ID\n"
+              )
+
         field = int(input('\n'))
         if field == 1:
             return 'type', '+'
@@ -26,4 +29,7 @@ def search_input():
             print("Введите описание")
             value = input('\n')
             return 'description', value
+        elif field == 6:
+            value = int(input('\n'))
+            return 'id', value
         print("Категория выбрана неправильно. Введите номер от 1 до 5")
