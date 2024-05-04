@@ -1,2 +1,3 @@
 path = './'
-filename = 'money.json'
+datafile = 'money.json'
+balancefile = 'balance.json'

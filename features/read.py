@@ -1,7 +1,12 @@
 import json
-from variables import path, filename
+from variables import path, datafile, balancefile
 
 
 def read():
-    with open(path + filename, "r") as f:
+    with open(path + datafile, "r") as f:
+        return json.load(f)
+
+
+def read_balance():
+    with open(path + balancefile, "r") as f:
         return json.load(f)

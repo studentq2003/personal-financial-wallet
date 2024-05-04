@@ -11,3 +11,9 @@ class Data:
         self.date = date
         self.time = time
         self.description = description
+
+
+class Balance:
+    def __init__(self, data):
+        value = data['balance']
+        self.value = value

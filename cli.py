@@ -8,10 +8,11 @@ from components.errortext import red
 from components.bluetext import blue
 from components.commands import commands
 from features.add import add
+from features.balance import balance
+from features.rewrite_balance import rewrite_balance
 
 
 def main():
-    global ordered_data
     welcome()
 
     while True:
@@ -26,6 +27,12 @@ def main():
 
         elif cmd == '--add':
             add()
+
+        elif cmd == '--balance' or cmd == '-b':
+            balance()
+
+        elif cmd == '-rb' or cmd == '--rbalance':
+            rewrite_balance()
 
         elif cmd == '--help' or cmd == '-h':
             help()
