@@ -3,7 +3,7 @@ from components.welcome import welcome
 from features.read import read
 from components.help import help
 from components.exit import exit
-from components.sort import sort
+from components.order import order
 from components.errortext import red
 from components.bluetext import blue
 from components.commands import commands
@@ -22,7 +22,7 @@ def main():
             show(data)
 
         elif cmd == '--order':
-            sort()
+            order()
 
         elif cmd == '--add':
             add()
